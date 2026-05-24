@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0D1B2A"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nuevo proyecto"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#F0C040"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Define tu proyecto y el capital que necesitas"
+            android:textSize="13sp"
+            android:textColor="#8899AA"
+            android:layout_marginBottom="24dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="#1A2B3C"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre del proyecto *"
+                    android:textSize="12sp"
+                    android:textColor="#8899AA"
+                    android:layout_marginBottom="4dp" />
+                <EditText
+                    android:id="@+id/etNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Ej: App de Delivery Ecologico"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:inputType="textCapSentences"
+                    android:background="@drawable/input_background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginBottom="18dp"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Descripcion *"
+                    android:textSize="12sp"
+                    android:textColor="#8899AA"
+                    android:layout_marginBottom="4dp" />
+                <EditText
+                    android:id="@+id/etDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:hint="Describe en que consiste tu proyecto..."
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:background="@drawable/input_background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:gravity="top|start"
+                    android:layout_marginBottom="18dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Categoria (opcional)"
+                    android:textSize="12sp"
+                    android:textColor="#8899AA"
+                    android:layout_marginBottom="4dp" />
+                <EditText
+                    android:id="@+id/etCategoria"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Ej: Tecnologia, Agricultura..."
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:inputType="textCapSentences"
+                    android:background="@drawable/input_background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginBottom="18dp"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Capital necesario (Aurus) *"
+                    android:textSize="12sp"
+                    android:textColor="#8899AA"
+                    android:layout_marginBottom="4dp" />
+                <EditText
+                    android:id="@+id/etObjetivo"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Ej: 500"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:inputType="numberDecimal"
+                    android:background="@drawable/input_background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnCrear"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="PUBLICAR PROYECTO"
+            android:textColor="#0D1B2A"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:background="@drawable/btn_primary"
+            android:stateListAnimator="@null"
+            android:layout_marginBottom="32dp" />
+
+    </LinearLayout>
+</ScrollView>

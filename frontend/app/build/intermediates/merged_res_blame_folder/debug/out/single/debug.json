@@ -1,0 +1,126 @@
+[
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/drawable_input_background.xml.flat",
+        "source": "com.novacapital.app-main-34:/drawable/input_background.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_activity_perfil.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/activity_perfil.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_item_inversion.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/item_inversion.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/drawable_badge_estado.xml.flat",
+        "source": "com.novacapital.app-main-34:/drawable/badge_estado.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.novacapital.app-main-34:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/drawable_btn_danger_outline.xml.flat",
+        "source": "com.novacapital.app-main-34:/drawable/btn_danger_outline.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/drawable_badge_estado_blue.xml.flat",
+        "source": "com.novacapital.app-main-34:/drawable/badge_estado_blue.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_activity_login.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_activity_main.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_item_proyecto.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/item_proyecto.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.novacapital.app-main-34:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_activity_registro.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/activity_registro.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/drawable_btn_primary.xml.flat",
+        "source": "com.novacapital.app-main-34:/drawable/btn_primary.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_activity_detalle_proyecto.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/activity_detalle_proyecto.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.novacapital.app-main-34:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/drawable_btn_secondary.xml.flat",
+        "source": "com.novacapital.app-main-34:/drawable/btn_secondary.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_item_reto.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/item_reto.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_activity_retos.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/activity_retos.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_activity_lista_proyectos.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/activity_lista_proyectos.xml"
+    },
+    {
+        "merged": "com.novacapital.app-merged_res-32:/layout_activity_crear_proyecto.xml.flat",
+        "source": "com.novacapital.app-main-34:/layout/activity_crear_proyecto.xml"
+    }
+]
