@@ -16,16 +16,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-/**
- * RendimientoScheduler - Paga rendimientos mensuales a los inversores.
- *
- * Se ejecuta el día 1 de cada mes a las 08:00.
- * Solo actúa sobre proyectos en estado FINANCIADO.
- * Para cada inversión calcula: rendimiento = cantidad_invertida * rendimiento_mensual / 100
- * Suma el resultado al saldo Aurus del inversor y registra la Transaccion.
- *
- * Para probar sin esperar un mes, cambia el cron por: "0 * * * * *" (cada minuto)
- */
+// Paga rendimientos mensuales a los proyectos financiados
+// Se ejecuta el día 1 de cada mes a las 08:00.
+// Para probar sin esperar, cambia el cron por "0 * * * * *" (cada minuto)
 @Component
 public class RendimientoScheduler {
 
