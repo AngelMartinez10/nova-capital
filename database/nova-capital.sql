@@ -1,6 +1,11 @@
+--  Nova Capital – Script SQL completo
+--  Autor: Àngel Martínez García | IES La Vereda | DAM 2025-26
+
 DROP DATABASE IF EXISTS NovaCapital;
 CREATE DATABASE NovaCapital CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE NovaCapital;
+
+-- 1. Administrador
 
 CREATE TABLE Administrador (
     id_admin        INT AUTO_INCREMENT PRIMARY KEY,
@@ -9,6 +14,8 @@ CREATE TABLE Administrador (
     contrasena      VARCHAR(255)  NOT NULL,
     fecha_registro  DATETIME      DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 2. Cliente
 
 CREATE TABLE Cliente (
     id_cliente      INT AUTO_INCREMENT PRIMARY KEY,
@@ -21,6 +28,8 @@ CREATE TABLE Cliente (
     fecha_registro  DATETIME      DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 3. Aurus (saldo virtual por cliente)
+
 CREATE TABLE Aurus (
     id_aurus    INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente  INT           NOT NULL UNIQUE,
@@ -29,22 +38,27 @@ CREATE TABLE Aurus (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- 4. Proyecto
+
 CREATE TABLE Proyecto (
-    id_proyecto         INT AUTO_INCREMENT PRIMARY KEY,
-    nombre              VARCHAR(150)  NOT NULL,
-    descripcion         TEXT,
-    categoria           VARCHAR(100),
-    objetivo_inversion  DECIMAL(12,2) NOT NULL CHECK (objetivo_inversion > 0),
-    cantidad_actual     DECIMAL(12,2) NOT NULL DEFAULT 0.00,
-    porcentaje          DECIMAL(5,2)  GENERATED ALWAYS AS
-                            (ROUND((cantidad_actual / objetivo_inversion) * 100, 2)) STORED,
-    id_cliente          INT,
-    estado              ENUM('ACTIVO','EN_PROGRESO','FINANCIADO','CANCELADO') DEFAULT 'ACTIVO',
-    fecha_creacion      DATETIME      DEFAULT CURRENT_TIMESTAMP,
-    fecha_actualizacion DATETIME      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    id_proyecto          INT AUTO_INCREMENT PRIMARY KEY,
+    nombre               VARCHAR(150)  NOT NULL,
+    descripcion          TEXT,
+    categoria            VARCHAR(100),
+    objetivo_inversion   DECIMAL(12,2) NOT NULL CHECK (objetivo_inversion > 0),
+    cantidad_actual      DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    porcentaje           DECIMAL(5,2)  GENERATED ALWAYS AS
+                             (ROUND((cantidad_actual / objetivo_inversion) * 100, 2)) STORED,
+    rendimiento_mensual  DECIMAL(5,2)  NOT NULL DEFAULT 0.00,
+    id_cliente           INT,
+    estado               ENUM('ACTIVO','EN_PROGRESO','FINANCIADO','CANCELADO') DEFAULT 'ACTIVO',
+    fecha_creacion       DATETIME      DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion  DATETIME      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
         ON DELETE SET NULL ON UPDATE CASCADE
 );
+
+-- 5. Inversion
 
 CREATE TABLE Inversion (
     id_inversion    INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,11 +66,13 @@ CREATE TABLE Inversion (
     id_proyecto     INT           NOT NULL,
     cantidad        DECIMAL(10,2) NOT NULL CHECK (cantidad > 0),
     fecha_inversion DATETIME      DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+    FOREIGN KEY (id_cliente)  REFERENCES Cliente(id_cliente)
         ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_proyecto) REFERENCES Proyecto(id_proyecto)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- 6. Transaccion
 
 CREATE TABLE Transaccion (
     id_transaccion  INT AUTO_INCREMENT PRIMARY KEY,
@@ -71,6 +87,8 @@ CREATE TABLE Transaccion (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- 7. Reto
+
 CREATE TABLE Reto (
     id_reto     INT AUTO_INCREMENT PRIMARY KEY,
     titulo      VARCHAR(150)  NOT NULL,
@@ -78,6 +96,8 @@ CREATE TABLE Reto (
     recompensa  DECIMAL(10,2) NOT NULL CHECK (recompensa > 0),
     activo      BOOLEAN       DEFAULT TRUE
 );
+
+-- 8. Cliente_Reto (N:M)
 
 CREATE TABLE Cliente_Reto (
     id_cliente        INT      NOT NULL,
@@ -87,9 +107,11 @@ CREATE TABLE Cliente_Reto (
     PRIMARY KEY (id_cliente, id_reto),
     FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
         ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_reto) REFERENCES Reto(id_reto)
+    FOREIGN KEY (id_reto)    REFERENCES Reto(id_reto)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- 9. Puntuacion
 
 CREATE TABLE Puntuacion (
     id_puntuacion  INT AUTO_INCREMENT PRIMARY KEY,
@@ -99,11 +121,13 @@ CREATE TABLE Puntuacion (
     comentario     TEXT,
     fecha          DATETIME DEFAULT CURRENT_TIMESTAMP,
     UNIQUE KEY uq_cliente_proyecto (id_cliente, id_proyecto),
-    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+    FOREIGN KEY (id_cliente)  REFERENCES Cliente(id_cliente)
         ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_proyecto) REFERENCES Proyecto(id_proyecto)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- 10. Notificacion
 
 CREATE TABLE Notificacion (
     id_notificacion INT AUTO_INCREMENT PRIMARY KEY,
@@ -115,12 +139,16 @@ CREATE TABLE Notificacion (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE INDEX idx_proyecto_estado     ON Proyecto(estado);
-CREATE INDEX idx_proyecto_cliente    ON Proyecto(id_cliente);
-CREATE INDEX idx_inversion_cliente   ON Inversion(id_cliente);
-CREATE INDEX idx_inversion_proyecto  ON Inversion(id_proyecto);
-CREATE INDEX idx_transaccion_cliente ON Transaccion(id_cliente);
-CREATE INDEX idx_notif_cliente_leido ON Notificacion(id_cliente, leido);
+-- Índices
+
+CREATE INDEX idx_proyecto_estado      ON Proyecto(estado);
+CREATE INDEX idx_proyecto_cliente     ON Proyecto(id_cliente);
+CREATE INDEX idx_inversion_cliente    ON Inversion(id_cliente);
+CREATE INDEX idx_inversion_proyecto   ON Inversion(id_proyecto);
+CREATE INDEX idx_transaccion_cliente  ON Transaccion(id_cliente);
+CREATE INDEX idx_notif_cliente_leido  ON Notificacion(id_cliente, leido);
+
+-- Datos iniciales: 5 retos
 
 INSERT INTO Reto (titulo, descripcion, recompensa) VALUES
 ('Primera inversion',      'Realiza tu primera inversion en cualquier proyecto', 50.00),
@@ -128,3 +156,13 @@ INSERT INTO Reto (titulo, descripcion, recompensa) VALUES
 ('Inversor diversificado', 'Invierte en 3 proyectos distintos',                  150.00),
 ('Proyecto financiado',    'Financia completamente un proyecto',                 200.00),
 ('Inversor veterano',      'Realiza 10 inversiones en total',                    300.00);
+
+-- Datos iniciales: 3 proyectos de ejemplo con rendimiento asignado
+-- (Los usuarios se registran siempre por /api/auth/registro)
+
+-- NOTA: id_cliente NULL porque aún no hay clientes registrados.
+-- Actualiza el id_cliente después de registrar usuarios.
+INSERT INTO Proyecto (nombre, descripcion, categoria, objetivo_inversion, rendimiento_mensual) VALUES
+('App de Delivery Ecologico',   'Plataforma de reparto con vehiculos electricos',   'Tecnologia',  500.00, 1.50),
+('Huerto Urbano Compartido',    'Red de huertos comunitarios en ciudad',             'Agricultura', 300.00, 1.80),
+('Academia Online de Idiomas',  'Plataforma de aprendizaje de idiomas con IA',      'Educacion',   800.00, 0.75);

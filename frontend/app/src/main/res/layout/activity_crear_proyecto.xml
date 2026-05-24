@@ -127,8 +127,37 @@
                     android:background="@drawable/input_background"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
+                    android:layout_marginBottom="18dp"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rendimiento mensual para inversores (0.5% - 2%) *"
+                    android:textSize="12sp"
+                    android:textColor="#8899AA"
+                    android:layout_marginBottom="4dp" />
+                <EditText
+                    android:id="@+id/etRendimiento"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="Ej: 1.5"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:inputType="numberDecimal"
+                    android:background="@drawable/input_background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Los inversores recibirán este % de su inversión cada mes una vez el proyecto esté financiado"
+                    android:textSize="11sp"
+                    android:textColor="#8899AA"
+                    android:layout_marginBottom="8dp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

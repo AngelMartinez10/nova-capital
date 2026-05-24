@@ -11,8 +11,8 @@ import com.novacapital.repository.PuntuacionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProyectoService {
@@ -29,45 +29,28 @@ public class ProyectoService {
         this.puntuacionRepo = puntuacionRepo;
     }
 
-    // Convierte cada entidad Proyecto a DTO añadiéndole la media de valoraciones
     public List<ProyectoResponse> listarTodos() {
-        List<Proyecto> proyectos = proyectoRepo.findAll();
-
-        List<ProyectoResponse> resultado = new ArrayList<>();
-        for (Proyecto p : proyectos) {
-            resultado.add(toResponseConMedia(p));
-        }
-        return resultado;
+        return proyectoRepo.findAll().stream()
+                .map(this::toResponseConMedia)
+                .collect(Collectors.toList());
     }
 
-    // Convierte el String del estado a enum y filtra; lanza error si el estado no existe
     public List<ProyectoResponse> listarPorEstado(String estado) {
-        Proyecto.EstadoProyecto estadoEnum;
         try {
-            estadoEnum = Proyecto.EstadoProyecto.valueOf(estado.toUpperCase());
+            Proyecto.EstadoProyecto estadoEnum = Proyecto.EstadoProyecto.valueOf(estado.toUpperCase());
+            return proyectoRepo.findByEstado(estadoEnum).stream()
+                    .map(this::toResponseConMedia)
+                    .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
             throw new BadRequestException("Estado inválido: " + estado +
                     ". Valores válidos: ACTIVO, EN_PROGRESO, FINANCIADO, CANCELADO");
         }
-
-        List<Proyecto> proyectos = proyectoRepo.findByEstado(estadoEnum);
-
-        List<ProyectoResponse> resultado = new ArrayList<>();
-        for (Proyecto p : proyectos) {
-            resultado.add(toResponseConMedia(p));
-        }
-        return resultado;
     }
 
-    // Convierte los proyectos de un cliente a DTOs con su media de valoraciones
     public List<ProyectoResponse> listarPorCliente(Integer idCliente) {
-        List<Proyecto> proyectos = proyectoRepo.findByClienteIdCliente(idCliente);
-
-        List<ProyectoResponse> resultado = new ArrayList<>();
-        for (Proyecto p : proyectos) {
-            resultado.add(toResponseConMedia(p));
-        }
-        return resultado;
+        return proyectoRepo.findByClienteIdCliente(idCliente).stream()
+                .map(this::toResponseConMedia)
+                .collect(Collectors.toList());
     }
 
     public ProyectoResponse obtenerPorId(Integer id) {
@@ -85,6 +68,7 @@ public class ProyectoService {
         proyecto.setDescripcion(request.getDescripcion());
         proyecto.setCategoria(request.getCategoria());
         proyecto.setObjetivoInversion(request.getObjetivoInversion());
+        proyecto.setRendimientoMensual(request.getRendimientoMensual());
         proyecto.setCliente(cliente);
 
         return toResponseConMedia(proyectoRepo.save(proyecto));
@@ -111,7 +95,6 @@ public class ProyectoService {
         return proyectoRepo.findByClienteIdCliente(idCliente).size();
     }
 
-    // Convierte un Proyecto a DTO y le añade la media de valoraciones de la BD
     private ProyectoResponse toResponseConMedia(Proyecto p) {
         ProyectoResponse dto = ProyectoResponse.from(p);
         Double media = puntuacionRepo.calcularMediaPorProyecto(p.getIdProyecto());

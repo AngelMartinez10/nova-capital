@@ -5,9 +5,6 @@ import com.novacapital.entity.Proyecto;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * DTO de respuesta con datos completos de un proyecto.
- */
 public class ProyectoResponse {
 
     private Integer idProyecto;
@@ -17,6 +14,7 @@ public class ProyectoResponse {
     private BigDecimal objetivoInversion;
     private BigDecimal cantidadActual;
     private BigDecimal porcentaje;
+    private BigDecimal rendimientoMensual;
     private String estado;
     private String creadorNombre;
     private Integer idCreador;
@@ -25,15 +23,16 @@ public class ProyectoResponse {
 
     public static ProyectoResponse from(Proyecto p) {
         ProyectoResponse dto = new ProyectoResponse();
-        dto.idProyecto       = p.getIdProyecto();
-        dto.nombre           = p.getNombre();
-        dto.descripcion      = p.getDescripcion();
-        dto.categoria        = p.getCategoria();
+        dto.idProyecto        = p.getIdProyecto();
+        dto.nombre            = p.getNombre();
+        dto.descripcion       = p.getDescripcion();
+        dto.categoria         = p.getCategoria();
         dto.objetivoInversion = p.getObjetivoInversion();
-        dto.cantidadActual   = p.getCantidadActual();
-        dto.porcentaje       = p.getPorcentaje();
-        dto.estado           = p.getEstado().name();
-        dto.fechaCreacion    = p.getFechaCreacion();
+        dto.cantidadActual    = p.getCantidadActual();
+        dto.porcentaje        = p.getPorcentaje();
+        dto.rendimientoMensual = p.getRendimientoMensual();
+        dto.estado            = p.getEstado().name();
+        dto.fechaCreacion     = p.getFechaCreacion();
         if (p.getCliente() != null) {
             dto.creadorNombre = p.getCliente().getNombre() + " " + p.getCliente().getApellidos();
             dto.idCreador     = p.getCliente().getIdCliente();
@@ -41,7 +40,6 @@ public class ProyectoResponse {
         return dto;
     }
 
-    // Getters
     public Integer getIdProyecto() { return idProyecto; }
     public String getNombre() { return nombre; }
     public String getDescripcion() { return descripcion; }
@@ -49,6 +47,7 @@ public class ProyectoResponse {
     public BigDecimal getObjetivoInversion() { return objetivoInversion; }
     public BigDecimal getCantidadActual() { return cantidadActual; }
     public BigDecimal getPorcentaje() { return porcentaje; }
+    public BigDecimal getRendimientoMensual() { return rendimientoMensual; }
     public String getEstado() { return estado; }
     public String getCreadorNombre() { return creadorNombre; }
     public Integer getIdCreador() { return idCreador; }

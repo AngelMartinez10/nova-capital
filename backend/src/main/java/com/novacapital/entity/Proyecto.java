@@ -32,6 +32,9 @@ public class Proyecto {
     @Column(name = "porcentaje", insertable = false, updatable = false, precision = 5, scale = 2)
     private BigDecimal porcentaje;
 
+    @Column(name = "rendimiento_mensual", nullable = false, precision = 5, scale = 2)
+    private BigDecimal rendimientoMensual = BigDecimal.ZERO;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private EstadoProyecto estado = EstadoProyecto.ACTIVO;
@@ -80,6 +83,8 @@ public class Proyecto {
     public BigDecimal getCantidadActual() { return cantidadActual; }
     public void setCantidadActual(BigDecimal cantidadActual) { this.cantidadActual = cantidadActual; }
     public BigDecimal getPorcentaje() { return porcentaje; }
+    public BigDecimal getRendimientoMensual() { return rendimientoMensual; }
+    public void setRendimientoMensual(BigDecimal rendimientoMensual) { this.rendimientoMensual = rendimientoMensual; }
     public EstadoProyecto getEstado() { return estado; }
     public void setEstado(EstadoProyecto estado) { this.estado = estado; }
     public LocalDateTime getFechaCreacion() { return fechaCreacion; }

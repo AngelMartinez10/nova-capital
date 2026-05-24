@@ -22,7 +22,7 @@ import retrofit2.Response;
 
 public class CrearProyectoActivity extends AppCompatActivity {
 
-    private EditText etNombre, etDescripcion, etCategoria, etObjetivo;
+    private EditText etNombre, etDescripcion, etCategoria, etObjetivo, etRendimiento;
     private Button btnCrear;
     private SessionManager sessionManager;
 
@@ -40,6 +40,7 @@ public class CrearProyectoActivity extends AppCompatActivity {
         etDescripcion = findViewById(R.id.etDescripcion);
         etCategoria   = findViewById(R.id.etCategoria);
         etObjetivo    = findViewById(R.id.etObjetivo);
+        etRendimiento = findViewById(R.id.etRendimiento);
         btnCrear      = findViewById(R.id.btnCrear);
 
         sessionManager = new SessionManager(this);
@@ -48,14 +49,16 @@ public class CrearProyectoActivity extends AppCompatActivity {
     }
 
     private void crearProyecto() {
-        String nombre      = etNombre.getText().toString().trim();
-        String descripcion = etDescripcion.getText().toString().trim();
-        String categoria   = etCategoria.getText().toString().trim();
-        String objetivoStr = etObjetivo.getText().toString().trim();
+        String nombre          = etNombre.getText().toString().trim();
+        String descripcion     = etDescripcion.getText().toString().trim();
+        String categoria       = etCategoria.getText().toString().trim();
+        String objetivoStr     = etObjetivo.getText().toString().trim();
+        String rendimientoStr  = etRendimiento.getText().toString().trim();
 
-        if (TextUtils.isEmpty(nombre))      { etNombre.setError("Campo obligatorio"); return; }
-        if (TextUtils.isEmpty(descripcion)) { etDescripcion.setError("Campo obligatorio"); return; }
-        if (TextUtils.isEmpty(objetivoStr)) { etObjetivo.setError("Campo obligatorio"); return; }
+        if (TextUtils.isEmpty(nombre))       { etNombre.setError("Campo obligatorio");      return; }
+        if (TextUtils.isEmpty(descripcion))  { etDescripcion.setError("Campo obligatorio"); return; }
+        if (TextUtils.isEmpty(objetivoStr))  { etObjetivo.setError("Campo obligatorio");    return; }
+        if (TextUtils.isEmpty(rendimientoStr)) { etRendimiento.setError("Campo obligatorio"); return; }
 
         BigDecimal objetivo;
         try {
@@ -69,8 +72,21 @@ public class CrearProyectoActivity extends AppCompatActivity {
             return;
         }
 
+        BigDecimal rendimiento;
+        try {
+            rendimiento = new BigDecimal(rendimientoStr);
+            if (rendimiento.compareTo(new BigDecimal("0.5")) < 0 ||
+                    rendimiento.compareTo(new BigDecimal("2.0")) > 0) {
+                etRendimiento.setError("El rendimiento debe estar entre 0.5% y 2%");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            etRendimiento.setError("Introduce un número válido");
+            return;
+        }
+
         ApiService api = ApiClient.getService(ApiService.class, sessionManager.getToken());
-        api.crearProyecto(new ProyectoRequest(nombre, descripcion, categoria, objetivo))
+        api.crearProyecto(new ProyectoRequest(nombre, descripcion, categoria, objetivo, rendimiento))
                 .enqueue(new Callback<ProyectoResponse>() {
                     @Override
                     public void onResponse(Call<ProyectoResponse> call,
